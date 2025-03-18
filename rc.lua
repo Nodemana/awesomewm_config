@@ -23,7 +23,7 @@ local lain = require("lain")
 local vertical = require("vertical")
 local bluetooth_widget = require("bluetooth_widget")
 
-awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
+awful.spawn.with_shell("picom --backend glx --config ~/.config/picom/picom.conf")
 awful.util.spawn_with_shell("~/.config/awesome/autostart.sh")
 
 -- {{{ Error handling
