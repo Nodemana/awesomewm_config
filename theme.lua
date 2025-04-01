@@ -1,6 +1,8 @@
 ---------------------------
 -- Default awesome theme --
 ---------------------------
+local gfs = require("gears.filesystem")
+local awful = require("awful")
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
@@ -134,7 +136,24 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = 'Papirus-Dark'
-theme.wallpaper = "~/Wallpapers/clouds2.jpg"
+
+-- Get a random wallpaper from a directory
+local wallpaper_dir = "/home/zach/Pictures/wallpapers/"
+local files = {}
+
+-- Use ls command to list image files (adjust the extension filter if needed)
+for file in io.popen('ls ' .. wallpaper_dir .. '*.jpg ' .. wallpaper_dir .. '*.png 2>/dev/null'):lines() do
+    table.insert(files, file)
+end
+-- Seed the random function to ensure different results each time
+math.randomseed(os.time() + os.clock() * 1000000)
+
+-- Pick a random file
+if #files > 0 then
+    theme.wallpaper = files[math.random(#files)]
+else
+    theme.wallpaper = wallpaper_dir .. "default.jpg"  -- Fallback wallpaper
+end
 
 return theme
 

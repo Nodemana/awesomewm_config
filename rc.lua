@@ -197,6 +197,9 @@ local mem = lain.widget.mem {
         widget:set_markup("RAM " .. mem_now.used .. "MB ")
     end
 }
+
+-- Battery Widget
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
